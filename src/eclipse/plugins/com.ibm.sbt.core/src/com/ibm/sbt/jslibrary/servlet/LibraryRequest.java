@@ -46,6 +46,7 @@ public class LibraryRequest {
     protected HttpServletResponse httpResponse;
 
     protected String jsLib;
+    protected String jsLayer;
     protected String jsVersion;
     protected String toolkitUrl;
     protected String toolkitJsUrl;
@@ -63,6 +64,7 @@ public class LibraryRequest {
 
     // List of the default endpoints being added by default.
     public static final String DEFAULT_JSLIB = "dojo";
+    public static final String DEFAULT_JSLAYER = null;
     public static final String DEFAULT_VERSION = "1.4";
     public static final Boolean DEFAULT_DEBUG = false;
     public static final Boolean DEFAULT_DEBUG_TRANSPORT = false;
@@ -89,6 +91,10 @@ public class LibraryRequest {
      * Underlying library to be used, default is 'dojo'
      */
     public static final String PARAM_JSLIB = "lib";
+    /**
+     * SBT JavaScriptLayer to be used, default is 'all'
+     */
+    public static final String PARAM_JSLAYER = "layer";    
 
     /**
      * Version of the library to use default is '1.4'
@@ -273,7 +279,13 @@ public class LibraryRequest {
     public String getJsLib() {
         return jsLib;
     }
-
+    
+    /**
+     * @return the jsLayer
+     */
+    public String getJsLayer() {
+        return jsLayer;
+    }
     /**
      * @return the jsVersion
      */
@@ -334,6 +346,7 @@ public class LibraryRequest {
      */
     protected void readFromRequest(HttpServletRequest req, SBTEnvironment defaultEnvironment) throws ServletException, IOException {
         jsLib = readString(req, PARAM_JSLIB, getDefaultJsLib());
+        jsLayer = readString(req, PARAM_JSLAYER, getDefaultJsLayer());
         jsVersion = readString(req, PARAM_JSVERSION, "dojo".equals(jsLib) ? getDefaultJsVersion() : "");
         debug = Boolean.parseBoolean(readString(req, PARAM_DEBUG, getDefaultDebug()));
         debugTransport = Boolean.parseBoolean(readString(req, PARAM_DEBUG_TRANSPORT, getDefaultDebugTransport()));
@@ -358,6 +371,10 @@ public class LibraryRequest {
     
     protected String getDefaultJsLib() {
     	return DEFAULT_JSLIB;
+    }
+    
+    protected String getDefaultJsLayer() {
+    	return DEFAULT_JSLAYER;
     }
     
     protected String getDefaultJsVersion() {

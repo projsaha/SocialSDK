@@ -125,6 +125,8 @@ abstract public class AbstractLibrary {
 	public static final String		MODULE_XSL						= "sbt/xsl";
 	public static final String		MODULE_BASIC					= "sbt/authenticator/Basic";
 	public static final String		MODULE_OAUTH					= "sbt/authenticator/OAuth";
+	
+	public static final String[][]	LAYERS			= {{"ProfileServiceConnections", "sbt/layers/profileServiceConnections"}};
 
 	public static final String		PATH_SBT						= "sbt";							//$NON-NLS-1$
 	public static final String		PATH_SBTX						= "sbtx";							//$NON-NLS-1$
@@ -607,7 +609,6 @@ abstract public class AbstractLibrary {
 	 */
 	protected String[] getDependModules(LibraryRequest request, Map<String, JsonObject> endpoints) {
 		List<String> modules = new ArrayList<String>();
-
 		Collection<JsonObject> jsonObjects = endpoints.values();
 		for (JsonObject jsonObject : jsonObjects) {
 			if (jsonObject.getJsonProperty(PROP_INVALID) != null) {
@@ -648,9 +649,33 @@ abstract public class AbstractLibrary {
 			if (!modules.contains(MODULE_ENDPOINT)) {
 				modules.add(MODULE_ENDPOINT);
 			}
+			
+			// the logic for the layers
+			String layerModule = getLayerModules(request);
+			if(layerModule != null && !modules.contains(layerModule)){
+				modules.add(layerModule);
+			}
+			
 		}
 
 		return modules.toArray(new String[modules.size()]);
+	}
+	
+	protected String getLayerModules(LibraryRequest request){
+		String requestparam = null;
+		String layer = null;
+		if(request.getJsLayer() != null){
+			requestparam = request.getJsLayer();
+			for (int i=0; i<LAYERS.length; i++) {
+	            if (LAYERS[i][0].equals(requestparam)) {	            	
+	            	layer = LAYERS[i][1];
+	                return layer;
+	            }
+	        }  
+		}
+		return layer;
+		
+		
 	}
 
 	protected String getModuleUrl(LibraryRequest request, String modulePath, ModuleType type) {
