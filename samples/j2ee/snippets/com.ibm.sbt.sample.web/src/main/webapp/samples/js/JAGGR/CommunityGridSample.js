@@ -1,0 +1,1 @@
+require(["samples/js/JAGGR/modules/CommunityGrid"],function(sc){});    

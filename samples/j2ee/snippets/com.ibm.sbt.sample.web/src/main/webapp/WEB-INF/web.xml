@@ -88,5 +88,24 @@
 		<servlet-name>SnippetServlet</servlet-name>
 		<url-pattern>/snippet/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<description>The jaggr servlet handles requests to aggregate JS modules</description>
+		<display-name>JAGGR Servlet</display-name>
+		<servlet-name>JaggrServlet</servlet-name>
+		<servlet-class>com.ibm.jaggr.sbt.service.impl.AggregatorImpl</servlet-class>
+		<init-param>
+    		<param-name>alias</param-name> 
+   			 <param-value>/sbt.sample.web/jaggr</param-value> 
+  		</init-param>
+  		<init-param>
+    		<param-name>config</param-name> 
+    		<param-value>testaggr-config.js</param-value> 
+ 		 </init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JaggrServlet</servlet-name>
+		<url-pattern>/jaggr/*</url-pattern>
+	</servlet-mapping>
 
 </web-app>
