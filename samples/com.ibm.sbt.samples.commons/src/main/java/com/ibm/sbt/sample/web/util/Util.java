@@ -45,8 +45,9 @@ public class Util {
         { "jQuery 1.8.2 ScriptTag", "jquery182ST", "includes/jquery182ScriptTag.jsp", "/library?lib=jquery&ver=1.8.2" },
         //{ "jQuery 1.8.2 Debug", "jquery182debug", "includes/jquery182debug.jsp", "/library?lib=jquery&ver=1.8.2" }, 
         { "jQuery 1.9.1 CDN", "jquery191cdn", "includes/jquery191cdn.jsp", "/library?lib=jquery&ver=1.9.1" },
-        { "jQuery 1.9.1 CDN Debug", "jquery191cdndebug", "includes/jquery191cdndebug.jsp", "/library?lib=jquery&ver=1.9.1" }//,
+        { "jQuery 1.9.1 CDN Debug", "jquery191cdndebug", "includes/jquery191cdndebug.jsp", "/library?lib=jquery&ver=1.9.1" },
         //{ "Dojo Toolkit 1.8.0 SBT Layer", "dojo180Layer", "includes/dojo180Layer.jsp", "/library?lib=dojo&ver=1.8.0&layer=true&noext" }
+        { "JAGGR using Dojo Toolkit 1.8.0", "jaggrDojo180", "includes/jaggr180.jsp", "/library?lib=dojo&ver=1.8.0&layer=true" }
     };
 
     public static String[][] THEMES = new String[][] {
